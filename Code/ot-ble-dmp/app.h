@@ -18,6 +18,9 @@
 #ifndef APP_H
 #define APP_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 /**************************************************************************//**
  * Application Init.
  *****************************************************************************/
@@ -32,5 +35,9 @@ void app_exit(void);
  * Application Process Action.
  *****************************************************************************/
 void app_process_action(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

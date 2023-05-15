@@ -16,6 +16,8 @@
     <file name="uartdrv_config.h" generated="true" linked="false"/>
     <file name="sl_uartdrv_usart_vcom_config.h" generated="true" linked="false"/>
     <file name="sl_bluetooth_connection_config.h" generated="true" linked="false"/>
+    <file name="sl_i2cspm_i2c0_config.h" generated="true" linked="false"/>
+    <file name="sl_i2cspm_i2c1_config.h" generated="true" linked="false"/>
     <file name="sl_sleeptimer_config.h" generated="true" linked="false"/>
     <file name="sl_power_manager_config.h" generated="true" linked="false"/>
     <file name="dmadrv_config.h" generated="true" linked="false"/>

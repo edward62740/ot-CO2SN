@@ -36,8 +36,8 @@ component:
 - {id: bluetooth_feature_gatt_server}
 - {id: nvm3_lib}
 - {id: bluetooth_feature_sm}
-- {id: bluetooth_feature_gap}
 - {id: bluetooth_feature_legacy_advertiser}
+- {id: bluetooth_feature_gap}
 - {id: gatt_configuration}
 - {id: freertos}
 - {id: bluetooth_stack}
@@ -52,6 +52,8 @@ component:
 - {id: ot_stack_ftd}
 - {id: bluetooth_feature_system}
 - {id: bluetooth_feature_scanner}
+- instance: [i2c0, i2c1]
+  id: i2cspm
 - {id: freertos_heap_3}
 configuration:
 - {name: SL_BOARD_ENABLE_VCOM, value: '1'}

@@ -35,6 +35,11 @@ namespace LPC {
     scd_fp.wu();
   }
 
+  lpc_ret SCD4X::powerOff()
+  {
+    scd_fp.pd();
+  }
+
   lpc_ret SCD4X::discardMeasurement()
   {
     scd_fp.meas();

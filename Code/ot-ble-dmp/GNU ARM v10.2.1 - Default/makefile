@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include sensors/scd4x/subdir.mk
+-include sensors/opt3001/subdir.mk
 -include gecko_sdk_4.2.3/util/third_party/segger/systemview/SEGGER/subdir.mk
 -include gecko_sdk_4.2.3/util/third_party/openthread/third_party/tcplp/lib/subdir.mk
 -include gecko_sdk_4.2.3/util/third_party/openthread/third_party/tcplp/bsdtcp/cc/subdir.mk
@@ -42,6 +43,7 @@ RM := rm -rf
 -include gecko_sdk_4.2.3/protocol/openthread/platform-abstraction/rtos/subdir.mk
 -include gecko_sdk_4.2.3/protocol/openthread/platform-abstraction/efr32/subdir.mk
 -include gecko_sdk_4.2.3/protocol/bluetooth/src/subdir.mk
+-include gecko_sdk_4.2.3/platform/service/udelay/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/service/system/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/service/sleeptimer/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/service/power_manager/src/subdir.mk
@@ -62,6 +64,7 @@ RM := rm -rf
 -include gecko_sdk_4.2.3/platform/emdrv/nvm3/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/emdrv/gpiointerrupt/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/emdrv/dmadrv/src/subdir.mk
+-include gecko_sdk_4.2.3/platform/driver/i2cspm/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/driver/button/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/common/toolchain/src/subdir.mk
 -include gecko_sdk_4.2.3/platform/common/src/subdir.mk

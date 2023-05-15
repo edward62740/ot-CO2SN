@@ -33,6 +33,7 @@ gecko_sdk_4.2.3/platform/Device/SiliconLabs/MGM24/Source \
 gecko_sdk_4.2.3/platform/common/src \
 gecko_sdk_4.2.3/platform/common/toolchain/src \
 gecko_sdk_4.2.3/platform/driver/button/src \
+gecko_sdk_4.2.3/platform/driver/i2cspm/src \
 gecko_sdk_4.2.3/platform/emdrv/dmadrv/src \
 gecko_sdk_4.2.3/platform/emdrv/gpiointerrupt/src \
 gecko_sdk_4.2.3/platform/emdrv/nvm3/src \
@@ -53,6 +54,7 @@ gecko_sdk_4.2.3/platform/service/mpu/src \
 gecko_sdk_4.2.3/platform/service/power_manager/src \
 gecko_sdk_4.2.3/platform/service/sleeptimer/src \
 gecko_sdk_4.2.3/platform/service/system/src \
+gecko_sdk_4.2.3/platform/service/udelay/src \
 gecko_sdk_4.2.3/protocol/bluetooth/src \
 gecko_sdk_4.2.3/protocol/openthread/platform-abstraction/efr32 \
 gecko_sdk_4.2.3/protocol/openthread/platform-abstraction/rtos \
@@ -86,5 +88,6 @@ gecko_sdk_4.2.3/util/third_party/openthread/third_party/tcplp/bsdtcp/cc \
 gecko_sdk_4.2.3/util/third_party/openthread/third_party/tcplp/bsdtcp \
 gecko_sdk_4.2.3/util/third_party/openthread/third_party/tcplp/lib \
 gecko_sdk_4.2.3/util/third_party/segger/systemview/SEGGER \
+sensors/opt3001 \
 sensors/scd4x \
 

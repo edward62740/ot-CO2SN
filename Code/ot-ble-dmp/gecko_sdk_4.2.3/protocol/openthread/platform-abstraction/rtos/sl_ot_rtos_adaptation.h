@@ -21,8 +21,18 @@
 #ifndef OPENTHREAD_RTOS
 #define OPENTHREAD_RTOS
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 void sl_ot_rtos_init(void);
 
 void sl_ot_rtos_application_tick(void);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

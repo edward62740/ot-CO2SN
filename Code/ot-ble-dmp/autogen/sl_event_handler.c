@@ -16,6 +16,7 @@
 #include "platform-efr32.h"
 #include "sl_sleeptimer.h"
 #include "gpiointerrupt.h"
+#include "sl_i2cspm_instances.h"
 #include "sl_mbedtls.h"
 #include "sl_mpu.h"
 #include "nvm3_default.h"
@@ -52,6 +53,7 @@ void sl_kernel_start(void)
 void sl_driver_init(void)
 {
   GPIOINT_Init();
+  sl_i2cspm_init_instances();
   sl_simple_button_init_instances();
   sl_uartdrv_init_instances();
 }

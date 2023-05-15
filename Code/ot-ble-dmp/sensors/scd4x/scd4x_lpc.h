@@ -24,8 +24,6 @@ const uint32_t SCD4X_LPC_STD_MAX_CAL_OFFSET = 100;
 
 namespace LPC {
 
-
-
   typedef enum {
     ERR_NONE, ERR_COMMS, ERR_LPC, ERR_HW, ERR_WAIT
   } lpc_ret;
@@ -38,6 +36,7 @@ namespace LPC {
           int16_t (*frc)(uint16_t target, uint16_t* corr), int16_t (*persist)(void));
 
     lpc_ret powerOn();
+    lpc_ret powerOff();
     bool measure();
     lpc_ret discardMeasurement();
 
@@ -57,15 +56,10 @@ namespace LPC {
       int16_t (*persist)( void );
     } scd_fp;
 
-
-    //std::priority_queue<gl_min_t, std::vector<gl_min_t>, cmp_ttl> pq;
     struct { bool first; int32_t ttl; bool expend;
     uint16_t gl_min; bool limit; } state ;
     uint32_t frc_ctr = 0;
     int32_t prev_frc_offset = 0;
-
-    lpc_ret _sigPowerDown();
-    lpc_ret _sigPowerUp();
 
   };
 }

@@ -97,6 +97,14 @@
             <file name="sl_simple_button.h" linked="false" uri="studio:/sdk/platform/driver/button/inc/sl_simple_button.h"/>
           </folder>
         </folder>
+        <folder name="i2cspm">
+          <folder name="src">
+            <file name="sl_i2cspm.c" linked="false" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_i2cspm.h" linked="false" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
+          </folder>
+        </folder>
       </folder>
       <folder name="CMSIS">
         <folder name="Core">
@@ -192,6 +200,15 @@
             <file name="sli_sleeptimer.h" linked="false" uri="studio:/sdk/platform/service/sleeptimer/inc/sli_sleeptimer.h"/>
           </folder>
         </folder>
+        <folder name="udelay">
+          <folder name="src">
+            <file name="sl_udelay.c" linked="false" uri="studio:/sdk/platform/service/udelay/src/sl_udelay.c"/>
+            <file name="sl_udelay_armv6m_gcc.S" linked="false" uri="studio:/sdk/platform/service/udelay/src/sl_udelay_armv6m_gcc.S"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_udelay.h" linked="false" uri="studio:/sdk/platform/service/udelay/inc/sl_udelay.h"/>
+          </folder>
+        </folder>
       </folder>
       <folder name="emdrv">
         <folder name="dmadrv">
@@ -249,6 +266,7 @@
           <file name="em_emu.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_emu.c"/>
           <file name="em_eusart.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_eusart.c"/>
           <file name="em_gpio.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_gpio.c"/>
+          <file name="em_i2c.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_i2c.c"/>
           <file name="em_ldma.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_ldma.c"/>
           <file name="em_msc.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_msc.c"/>
           <file name="em_prs.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_prs.c"/>
@@ -274,6 +292,7 @@
           <file name="em_eusart.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_eusart.h"/>
           <file name="em_eusart_compat.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_eusart_compat.h"/>
           <file name="em_gpio.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_gpio.h"/>
+          <file name="em_i2c.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_i2c.h"/>
           <file name="em_ldma.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_ldma.h"/>
           <file name="em_msc.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_msc.h"/>
           <file name="em_msc_compat.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_msc_compat.h"/>
@@ -1509,8 +1528,6 @@
       </folder>
     </folder>
   </folder>
-  <file name="main.c" linked="false" uri="studio:/project/main.c"/>
-  <file name="app.c" linked="false" uri="studio:/project/app.c"/>
   <file name="bluetooth_event_callback.c" linked="false" uri="studio:/project/bluetooth_event_callback.c"/>
   <file name="app.h" linked="false" uri="studio:/project/app.h"/>
   <file name="reset_util.h" linked="false" uri="studio:/project/reset_util.h"/>
@@ -1532,6 +1549,7 @@
   <includePath uri="studio:/project/gecko_sdk_4.2.3/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/emdrv/gpiointerrupt/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/service/hfxo_manager/inc"/>
+  <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/driver/i2cspm/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/security/sl_component/sl_mbedtls_support/config"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/security/sl_component/sl_mbedtls_support/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/util/third_party/mbedtls/include"/>
@@ -1572,6 +1590,7 @@
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/service/sleeptimer/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/security/sl_component/sl_protocol_crypto/src"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/emdrv/uartdrv/inc"/>
+  <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/service/udelay/inc"/>
   <macroDefinition name="MGM240SA22VNA"/>
   <macroDefinition name="SL_COMPONENT_CATALOG_PRESENT"/>
   <macroDefinition name="MBEDTLS_CONFIG_FILE" value="&lt;sl_mbedtls_config.h>"/>

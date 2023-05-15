@@ -15,26 +15,32 @@
  *
  ******************************************************************************/
 
-#ifndef APP_H
-#define APP_H
+#ifndef APP_WIRELESS_H
+#define APP_WIRELESS_H
+
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-/**************************************************************************//**
- * Application Init.
- *****************************************************************************/
+
+
+#include <openthread/instance.h>
+
+#define ACT_LED_PORT     gpioPortC
+#define ACT_LED_PIN      8
+#define ERR_LED_PORT     gpioPortC
+#define ERR_LED_PIN      9
+
 void app_init(void);
 
-/**************************************************************************//**
- * Application Exit.
- *****************************************************************************/
 void app_exit(void);
 
-/**************************************************************************//**
- * Application Process Action.
- *****************************************************************************/
 void app_process_action(void);
+
+otInstance *otGetInstance(void);
+void sl_ot_create_instance(void);
+void sl_ot_cli_init(void);
 
 #ifdef __cplusplus
 }

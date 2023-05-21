@@ -28,11 +28,10 @@ sdk: {id: gecko_sdk, version: 4.2.3}
 toolchain_settings: []
 component:
 - {id: power_manager}
-- instance: [btn0, btn1]
-  id: simple_button
 - {id: ot_stack_mtd}
 - {id: rail_util_pti}
 - {id: ot_cli_source}
+- {id: emlib_iadc}
 - instance: [vcom]
   id: uartdrv_usart
 - {id: MGM240SD22VNA}

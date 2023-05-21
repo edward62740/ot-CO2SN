@@ -31,7 +31,6 @@ autogen \
 gecko_sdk_4.2.3/platform/Device/SiliconLabs/MGM24/Source \
 gecko_sdk_4.2.3/platform/common/src \
 gecko_sdk_4.2.3/platform/common/toolchain/src \
-gecko_sdk_4.2.3/platform/driver/button/src \
 gecko_sdk_4.2.3/platform/driver/i2cspm/src \
 gecko_sdk_4.2.3/platform/emdrv/dmadrv/src \
 gecko_sdk_4.2.3/platform/emdrv/gpiointerrupt/src \

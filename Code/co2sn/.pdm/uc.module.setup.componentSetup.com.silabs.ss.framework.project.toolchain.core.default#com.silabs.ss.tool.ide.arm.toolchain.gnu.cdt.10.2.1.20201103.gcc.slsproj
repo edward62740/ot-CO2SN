@@ -85,26 +85,6 @@
           </folder>
         </folder>
       </folder>
-      <folder name="driver">
-        <folder name="button">
-          <folder name="src">
-            <file name="sl_button.c" linked="false" uri="studio:/sdk/platform/driver/button/src/sl_button.c"/>
-            <file name="sl_simple_button.c" linked="false" uri="studio:/sdk/platform/driver/button/src/sl_simple_button.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_button.h" linked="false" uri="studio:/sdk/platform/driver/button/inc/sl_button.h"/>
-            <file name="sl_simple_button.h" linked="false" uri="studio:/sdk/platform/driver/button/inc/sl_simple_button.h"/>
-          </folder>
-        </folder>
-        <folder name="i2cspm">
-          <folder name="src">
-            <file name="sl_i2cspm.c" linked="false" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_i2cspm.h" linked="false" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
-          </folder>
-        </folder>
-      </folder>
       <folder name="CMSIS">
         <folder name="Core">
           <folder name="Include">
@@ -255,6 +235,7 @@
           <file name="em_eusart.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_eusart.c"/>
           <file name="em_gpio.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_gpio.c"/>
           <file name="em_i2c.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_i2c.c"/>
+          <file name="em_iadc.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_iadc.c"/>
           <file name="em_ldma.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_ldma.c"/>
           <file name="em_msc.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_msc.c"/>
           <file name="em_prs.c" linked="false" uri="studio:/sdk/platform/emlib/src/em_prs.c"/>
@@ -281,6 +262,7 @@
           <file name="em_eusart_compat.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_eusart_compat.h"/>
           <file name="em_gpio.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_gpio.h"/>
           <file name="em_i2c.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_i2c.h"/>
+          <file name="em_iadc.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_iadc.h"/>
           <file name="em_ldma.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_ldma.h"/>
           <file name="em_msc.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_msc.h"/>
           <file name="em_msc_compat.h" linked="false" uri="studio:/sdk/platform/emlib/inc/em_msc_compat.h"/>
@@ -349,6 +331,16 @@
               <file name="librail_config_mgm240sd22vna_gcc.a" linked="false" uri="studio:/sdk/platform/radio/rail_lib/autogen/librail_release/librail_config_mgm240sd22vna_gcc.a"/>
               <file name="librail_module_efr32xg24_gcc_release.a" linked="false" uri="studio:/sdk/platform/radio/rail_lib/autogen/librail_release/librail_module_efr32xg24_gcc_release.a"/>
             </folder>
+          </folder>
+        </folder>
+      </folder>
+      <folder name="driver">
+        <folder name="i2cspm">
+          <folder name="src">
+            <file name="sl_i2cspm.c" linked="false" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_i2cspm.h" linked="false" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
           </folder>
         </folder>
       </folder>
@@ -1398,15 +1390,11 @@
       </folder>
     </folder>
   </folder>
-  <file name="main.c" linked="false" uri="studio:/project/main.c"/>
-  <file name="app.c" linked="false" uri="studio:/project/app.c"/>
-  <file name="sleepy-mtd.c" linked="false" uri="studio:/project/sleepy-mtd.c"/>
   <file name="app.h" linked="false" uri="studio:/project/app.h"/>
   <file name="README.md" linked="false" uri="studio:/project/README.md"/>
   <includePath uri="studio:/project/"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/Device/SiliconLabs/MGM24/Include"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/common/inc"/>
-  <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/driver/button/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/CMSIS/Core/Include"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/service/device_init/inc"/>
   <includePath uri="studio:/project/gecko_sdk_4.2.3/platform/emdrv/dmadrv/inc"/>

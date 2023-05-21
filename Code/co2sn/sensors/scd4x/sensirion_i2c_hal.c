@@ -33,6 +33,7 @@
 #include "sensirion_common.h"
 #include "sensirion_config.h"
 #include "sl_i2cspm.h"
+#include "sl_sleeptimer.h"
 /*
  * INSTRUCTIONS
  * ============
@@ -134,5 +135,6 @@ int8_t sensirion_i2c_hal_write(uint8_t address, const uint8_t* data,
  * @param useconds the sleep time in microseconds
  */
 void sensirion_i2c_hal_sleep_usec(uint32_t useconds) {
+	if(useconds > 1000) return;
     sl_sleeptimer_delay_millisecond(useconds/1000);
 }

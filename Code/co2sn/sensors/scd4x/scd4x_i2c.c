@@ -40,6 +40,7 @@
 #include "sensirion_common.h"
 #include "sensirion_i2c.h"
 #include "sensirion_i2c_hal.h"
+#include "sl_sleeptimer.h"
 
 #define SCD4X_I2C_ADDRESS 0x62
 
@@ -73,8 +74,7 @@ int16_t scd4x_read_measurement_ticks(uint16_t* co2, uint16_t* temperature,
 
     error = sensirion_i2c_read_data_inplace(SCD4X_I2C_ADDRESS, &buffer[0], 6);
     if (error) {
-    	otCliOutputFormat("raise crc err\r\n");
-      //  return error;
+        return error;
     }
     *co2 = sensirion_common_bytes_to_uint16_t(&buffer[0]);
     *temperature = sensirion_common_bytes_to_uint16_t(&buffer[2]);
@@ -235,7 +235,7 @@ int16_t scd4x_perform_forced_recalibration(uint16_t target_co2_concentration,
         return error;
     }
 
-    sensirion_i2c_hal_sleep_usec(400000);
+    sl_sleeptimer_delay_millisecond(400);
 
     error = sensirion_i2c_read_data_inplace(SCD4X_I2C_ADDRESS, &buffer[0], 2);
     if (error) {
@@ -363,7 +363,7 @@ int16_t scd4x_perform_self_test(uint16_t* sensor_status) {
         return error;
     }
 
-    sensirion_i2c_hal_sleep_usec(10000000);
+    sl_sleeptimer_delay_millisecond(10000);
 
     error = sensirion_i2c_read_data_inplace(SCD4X_I2C_ADDRESS, &buffer[0], 2);
     if (error) {

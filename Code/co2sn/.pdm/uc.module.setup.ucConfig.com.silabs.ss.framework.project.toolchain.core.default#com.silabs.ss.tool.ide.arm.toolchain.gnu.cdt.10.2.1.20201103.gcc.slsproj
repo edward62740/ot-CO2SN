@@ -2,8 +2,6 @@
 <project name="uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc" propertyScope="project">
   <folder name="config">
     <file name="SEGGER_RTT_Conf.h" generated="true" linked="false"/>
-    <file name="sl_simple_button_btn0_config.h" generated="true" linked="false"/>
-    <file name="sl_simple_button_btn1_config.h" generated="true" linked="false"/>
     <file name="nvm3_default_config.h" generated="true" linked="false"/>
     <file name="psa_crypto_config.h" generated="true" linked="false"/>
     <file name="sl_device_init_dcdc_config.h" generated="true" linked="false"/>
@@ -14,7 +12,6 @@
     <file name="sl_uartdrv_usart_vcom_config.h" generated="true" linked="false"/>
     <file name="sl_i2cspm_i2c0_config.h" generated="true" linked="false"/>
     <file name="sl_i2cspm_i2c1_config.h" generated="true" linked="false"/>
-    <file name="sl_simple_button_config.h" generated="true" linked="false"/>
     <file name="sl_sleeptimer_config.h" generated="true" linked="false"/>
     <file name="sl_power_manager_config.h" generated="true" linked="false"/>
     <file name="sl_memory_config.h" generated="true" linked="false"/>

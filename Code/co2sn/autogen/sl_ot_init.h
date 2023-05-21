@@ -22,20 +22,9 @@
 #ifndef SL_OT_INIT_H
 #define SL_OT_INIT_H
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-
 void sl_ot_init(void);
 extern void sl_ot_create_instance(void); 
 extern void sl_ot_sleep_init(void); 
 extern void sl_ot_cli_init(void); 
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif // SL_OT_INIT_H

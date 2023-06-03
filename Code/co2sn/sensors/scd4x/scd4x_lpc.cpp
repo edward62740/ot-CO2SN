@@ -40,6 +40,7 @@ lpc_ret SCD4X::sig_ext_reset_fsm(void) {
 	fsm.ttl = _sig_get_fsm_cnt();
 	fsm.limit = false;
 	fsm._cons_fail = 0;
+	_mutex.state = false;
 	return ERR_NONE;
 }
 
@@ -121,6 +122,7 @@ lpc_ret SCD4X::measure()
 		_mutex_request_lock(SCD4X_LPC_CMD_FRC_LOCK_DUR_MS);
 		frc_ctr++;
 		prev_frc_offset = ret - 0x8000U;
+		prev_frc_age = 0;
 		if (ret == 0xFFFF)
 			return ERR_LPC; // return on next calls, ttl will be -ve
 	}
@@ -222,6 +224,7 @@ bool SCD4X::_mutex_request_lock(uint32_t dur) {
 	if(dur > SCD4X_LPC_CMD_MAX_LOCK_DUR_MS) return false;
 	_mutex.lastTickMs = scd_fp.getMsTick();
 	_mutex.reqLockDurMs = dur;
+	_mutex.state = true;
 	return true;
 
 	//CORE_EXIT_ATOMIC();

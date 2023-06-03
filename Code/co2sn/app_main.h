@@ -4,6 +4,8 @@
 
 #include "sensors/scd4x/scd4x_i2c.h"
 #include "sensors/scd4x/scd4x_lpc.h"
+#include <openthread/instance.h>
+#include "sl_sleeptimer.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,12 +13,44 @@ extern "C" {
 
 extern LPC::SCD4X scd41;
 
+typedef union {
+    uint64_t _64b;
+    struct {
+        uint32_t l;
+        uint32_t h;
+    } _32b;
+} eui_t;
+
+
+typedef struct
+{
+	bool isPend;
+	bool error;
+	uint16_t co2;
+	int32_t hum, temp;
+
+	int32_t offset;
+	uint32_t age, num;
+
+	volatile uint32_t vdd;
+	uint8_t pwr_state;
+} app_data_t;
+
+
+extern eui_t eui;
+extern app_data_t app_data;
+const uint32_t ALIVE_SLEEPTIMER_INTERVAL_MS = 7500;
+
+extern sl_sleeptimer_timer_handle_t alive_timer;
+void alive_cb(sl_sleeptimer_timer_handle_t *handle, void *data);
 
 void app_init(void);
 
 void app_exit(void);
 
 void app_process_action(void);
+
+otInstance *otGetInstance(void);
 
 #define ACT_LED_PORT     gpioPortB
 #define ACT_LED_PIN      2

@@ -87,23 +87,39 @@
 
 // $[USART0]
 // USART0 RX on PA08
+#ifndef USART0_RX_PORT                          
 #define USART0_RX_PORT                           gpioPortA
+#endif
+#ifndef USART0_RX_PIN                           
 #define USART0_RX_PIN                            8
+#endif
 
 // USART0 TX on PA09
+#ifndef USART0_TX_PORT                          
 #define USART0_TX_PORT                           gpioPortA
+#endif
+#ifndef USART0_TX_PIN                           
 #define USART0_TX_PIN                            9
+#endif
 
 // [USART0]$
 
 // $[I2C1]
 // I2C1 SCL on PD04
+#ifndef I2C1_SCL_PORT                           
 #define I2C1_SCL_PORT                            gpioPortD
+#endif
+#ifndef I2C1_SCL_PIN                            
 #define I2C1_SCL_PIN                             4
+#endif
 
 // I2C1 SDA on PD03
+#ifndef I2C1_SDA_PORT                           
 #define I2C1_SDA_PORT                            gpioPortD
+#endif
+#ifndef I2C1_SDA_PIN                            
 #define I2C1_SDA_PIN                             3
+#endif
 
 // [I2C1]$
 
@@ -136,12 +152,20 @@
 
 // $[I2C0]
 // I2C0 SCL on PB01
+#ifndef I2C0_SCL_PORT                           
 #define I2C0_SCL_PORT                            gpioPortB
+#endif
+#ifndef I2C0_SCL_PIN                            
 #define I2C0_SCL_PIN                             1
+#endif
 
 // I2C0 SDA on PB00
+#ifndef I2C0_SDA_PORT                           
 #define I2C0_SDA_PORT                            gpioPortB
+#endif
+#ifndef I2C0_SDA_PIN                            
 #define I2C0_SDA_PIN                             0
+#endif
 
 // [I2C0]$
 
@@ -158,4 +182,7 @@
 // [CUSTOM_PIN_NAME]$
 
 #endif // PIN_CONFIG_H
+
+// $[IADC0]
+// [IADC0]$
 

@@ -8,12 +8,15 @@
 #ifndef APP_COAP_H_
 #define APP_COAP_H_
 
-#include "openthread/ip6.h"
-#include "app_main.h"
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+#include "openthread/ip6.h"
+#include "app_main.h"
 
 typedef enum
 {

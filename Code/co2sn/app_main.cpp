@@ -1,6 +1,7 @@
 #include <app_main.h>
 #include <app_thread.h>
 #include <app_coap.h>
+#include "app_dns.h"
 #include <assert.h>
 #include <openthread-core-config.h>
 #include <openthread/config.h>
@@ -24,10 +25,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#define APP_DNS_DEBUG_PRINT 1
+
 static otInstance* sInstance = NULL;
 static const uint32_t MEASUREMENT_INTERVAL_MS = 60000;
 static const uint32_t VSENSE_DIV_MULTIPLIER = 2;
-extern void otAppCliInit(otInstance *aInstance);
+extern "C" void otAppCliInit(otInstance *aInstance);
 
 eui_t eui; // device EUI64
 app_data_t app_data = {}; // application public variables
@@ -51,6 +54,7 @@ static bool appSrpDone = false;
 static bool appCoapSendAlive = false;
 sl_sleeptimer_timer_handle_t alive_timer;
 
+dns d(8);
 /** HANDLERS/ISR **/
 void alive_cb(sl_sleeptimer_timer_handle_t *handle, void *data)
 {
@@ -196,7 +200,6 @@ void app_init(void)
     assert(otThreadSetEnabled(sInstance, true) == OT_ERROR_NONE);
     appCoapInit();
     appSrpInit();
-
 }
 
 
@@ -224,6 +227,26 @@ static void app_scd_algo(void) {
 	} else if (!scd41_state.isDiscarded && !scd41_state.isMeas) {
 		scd41_state.ret = scd41.discardMeasurement();
 		otCliOutputFormat("discard %d, \n", scd41_state.ret);
+		otDnsServiceInfo *tmp;
+		uint8_t num = 0;
+
+		if(d.browseResultReady(&tmp, &num))
+		{
+			otCliOutputFormat(
+					"**Application layer discovery complete, found %d devices**\n",
+					num);
+			for (uint8_t i = 0; i < num; i++) {
+				char buf[OT_IP6_ADDRESS_STRING_SIZE];
+
+				otIp6AddressToString(&tmp[i].mHostAddress, buf,
+						sizeof(buf));
+				otCliOutputFormat("%s\n ", buf);
+
+			}
+
+		}
+
+		otCliOutputFormat("Assert: Success \n\n");
 		BURTC_CounterReset();
 		BURTC_CompareSet(0, 5200);
 		BURTC_IntEnable(BURTC_IEN_COMP);
@@ -249,9 +272,9 @@ static void app_scd_algo(void) {
 		//GPIO_PinOutClear(PWR_EN_ST_PORT, PWR_EN_ST_PIN);
 		scd41_state.ret = scd41.powerOff();
 		app_data.isPend = !appCoapCts(&app_data, MSG_DATA);
-
+		d.browse("_ot._udp.default.service.arpa.");
 		BURTC_CounterReset();
-		BURTC_CompareSet(0, MEASUREMENT_INTERVAL_MS);
+		BURTC_CompareSet(0, MEASUREMENT_INTERVAL_MS/8);
 		BURTC_IntEnable(BURTC_IEN_COMP);
 	}
 }

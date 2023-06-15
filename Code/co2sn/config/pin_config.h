@@ -86,20 +86,20 @@
 // [TIMER4]$
 
 // $[USART0]
-// USART0 RX on PA08
+// USART0 RX on PA09
 #ifndef USART0_RX_PORT                          
 #define USART0_RX_PORT                           gpioPortA
 #endif
 #ifndef USART0_RX_PIN                           
-#define USART0_RX_PIN                            8
+#define USART0_RX_PIN                            9
 #endif
 
-// USART0 TX on PA09
+// USART0 TX on PA08
 #ifndef USART0_TX_PORT                          
 #define USART0_TX_PORT                           gpioPortA
 #endif
 #ifndef USART0_TX_PIN                           
-#define USART0_TX_PIN                            9
+#define USART0_TX_PIN                            8
 #endif
 
 // [USART0]$

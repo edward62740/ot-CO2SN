@@ -39,7 +39,6 @@ typedef struct
 
 extern eui_t eui;
 extern app_data_t app_data;
-const uint32_t ALIVE_SLEEPTIMER_INTERVAL_MS = 7500;
 
 extern sl_sleeptimer_timer_handle_t alive_timer;
 void alive_cb(sl_sleeptimer_timer_handle_t *handle, void *data);
@@ -83,7 +82,6 @@ otInstance *otGetInstance(void);
 #define LOAD_SENSE_PIN   7
 
 
-void sleepyInit(void);
 void setNetworkConfiguration(void);
 void initUdp(void);
 void applicationTick(void);

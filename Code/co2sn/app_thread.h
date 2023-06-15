@@ -1,10 +1,3 @@
-/*
- *  app_thread.h
- *
- *  Created on: May 20, 2023
- *      Author: edward62740
- */
-
 #ifndef APP_THREAD_H_
 #define APP_THREAD_H_
 
@@ -12,9 +5,10 @@
 extern "C" {
 #endif
 
+#include "stdint.h"
 
 void applicationTick(void);
-void sleepyInit(void);
+void sleepyInit(uint32_t poll_period);
 void setNetworkConfiguration(void);
 
 

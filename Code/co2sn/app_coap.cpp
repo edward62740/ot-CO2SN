@@ -245,7 +245,7 @@ void appCoapCheckConnection(void)
     {
         otThreadBecomeDetached(otGetInstance());
         //otInstanceErasePersistentInfo();
-        sleepyInit();
+        //sleepyInit();
         setNetworkConfiguration();
         otIp6SetEnabled(otGetInstance(), true);
         otThreadSetEnabled(otGetInstance(), true);

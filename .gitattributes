@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+/Code/co2sn/gecko_sdk_4.3.0/* linguist-vendored
+/Code/co2sn/"GNU[[:space]]ARM[[:space]]v10.2.1[[:space]]-[[:space]]Default"/* linguist-vendored
+/Code/co2sn/autogen/* linguist-vendored
+/Code/co2sn/config/* linguist-vendored
+/Code/co2sn/gecko_sdk_4.3.0/* linguist-vendored

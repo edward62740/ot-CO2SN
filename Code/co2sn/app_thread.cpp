@@ -1,9 +1,6 @@
-
-// Define module name for Power Manager debuging feature.
-#define CURRENT_MODULE_NAME    "OPENTHREAD_SAMPLE_APP"
-
-#include <app_thread.h>
-#include <app_main.h>
+#include "app_thread.h"
+#include "app_main.h"
+#include <stdio.h>
 #include <string.h>
 #include <assert.h>
 
@@ -24,19 +21,18 @@
 #include "sl_power_manager.h"
 #endif
 
-#define SLEEPY_POLL_PERIOD_MS 2000
+
 
 otInstance *otGetInstance(void);
 
-static bool                sAllowSleep                    = true;
+constexpr static bool LOW_POWER_MODE = true;
 
-void sleepyInit(void)
+void sleepyInit(uint32_t poll_period)
 {
     otError error;
-    otCliOutputFormat("sleepy-demo-mtd started\r\n");
 
     otLinkModeConfig config;
-    SuccessOrExit(error = otLinkSetPollPeriod(otGetInstance(), SLEEPY_POLL_PERIOD_MS));
+    SuccessOrExit(error = otLinkSetPollPeriod(otGetInstance(), poll_period));
 
     config.mRxOnWhenIdle = false;
     config.mDeviceType   = 0;
@@ -44,19 +40,15 @@ void sleepyInit(void)
     SuccessOrExit(error = otThreadSetLinkMode(otGetInstance(), config));
 
 exit:
-    if (error != OT_ERROR_NONE)
-    {
-        otCliOutputFormat("Initialization failed with: %d, %s\r\n", error, otThreadErrorToString(error));
-    }
     return;
 }
 
 /*
  * Callback from sl_ot_is_ok_to_sleep to check if it is ok to go to sleep.
  */
-bool efr32AllowSleepCallback(void)
+inline bool efr32AllowSleepCallback(void)
 {
-    return sAllowSleep;
+    return LOW_POWER_MODE;
 }
 
 /*
@@ -92,7 +84,7 @@ void setNetworkConfiguration(void)
     aDataset.mComponents.mIsExtendedPanIdPresent = true;
 
     /* Set network key to 1234C0DE1AB51234C0DE1AB51234C0DE */
-    uint8_t key[OT_NETWORK_KEY_SIZE] = { };
+    uint8_t key[OT_NETWORK_KEY_SIZE] = {};
     memcpy(aDataset.mNetworkKey.m8, key, sizeof(aDataset.mNetworkKey));
     aDataset.mComponents.mIsNetworkKeyPresent = true;
 
@@ -110,13 +102,6 @@ void setNetworkConfiguration(void)
         return;
     }
 }
-
-
-
-
-#ifdef SL_CATALOG_KERNEL_PRESENT
-#define applicationTick sl_ot_rtos_application_tick
-#endif
 
 void applicationTick(void)
 {

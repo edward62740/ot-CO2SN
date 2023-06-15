@@ -20,8 +20,8 @@
     <property object="PORTIO" propertyId="portio.i2c1.location.sda" value="51"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.rx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.tx" value="Enabled"/>
-    <property object="PORTIO" propertyId="portio.usart0.location.rx" value="8"/>
-    <property object="PORTIO" propertyId="portio.usart0.location.tx" value="9"/>
+    <property object="PORTIO" propertyId="portio.usart0.location.rx" value="9"/>
+    <property object="PORTIO" propertyId="portio.usart0.location.tx" value="8"/>
     <property object="PTI" propertyId="ABModule.selectedRequirement" value="pti%T%SL_RAIL_UTIL_PTI%T%sl_rail_util_pti_config.h"/>
     <property object="PTI" propertyId="ABPeripheral.included" value="true"/>
     <property object="USART0" propertyId="ABModule.selectedRequirement" value="usart%T%SL_UARTDRV_USART_VCOM%T%sl_uartdrv_usart_vcom_config.h"/>

@@ -31,7 +31,7 @@
 #include <openthread/cli.h>
 #include <openthread/platform/logging.h>
 
-
+/*
 I2C_TransferReturn_TypeDef I2C_detect1(I2C_TypeDef *i2c, uint8_t addr) {
 
 	I2C_TransferSeq_TypeDef i2cTransfer;
@@ -46,7 +46,7 @@ I2C_TransferReturn_TypeDef I2C_detect1(I2C_TypeDef *i2c, uint8_t addr) {
 	return I2CSPM_Transfer(i2c, &i2cTransfer);
 
 }
-
+*/
 void initGPIO(void) {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 	GPIO_PinModeSet(PWR_ST_0_PORT, PWR_ST_0_PIN, gpioModeInput, 1); // Asserted when the LDOs can be enabled (i.e. Vbatt > Vchrdy)
@@ -71,6 +71,8 @@ void initGPIO(void) {
 	GPIO_PinModeSet(INT_OPT_PORT, INT_OPT_PIN, gpioModeInputPullFilter, 0); // OPT interrupt
 	GPIO_PinModeSet(ACT_LED_PORT, ACT_LED_PIN, gpioModePushPull, 0);
 	GPIO_PinModeSet(ERR_LED_PORT, ERR_LED_PIN, gpioModePushPull, 0);
+
+	//GPIO_PinOutSet(PWR_EN_SCD_PORT, PWR_EN_SCD_PIN);
 }
 
 void initBURTC(void) {
@@ -88,7 +90,7 @@ void initBURTC(void) {
 }
 
 void initSensors(void) {
-
+	opt3001_init();
 }
 
 void initVddMonitor(void) {
@@ -124,53 +126,44 @@ void initVddMonitor(void) {
 }
 
 int main(void) {
-	// Initialize Silicon Labs device, system, service(s) and protocol stack(s).
-	// Note that if the kernel is present, processing task(s) will be created by
-	// this call.
 	sl_system_init();
 	initGPIO();
 	initBURTC();
 	initVddMonitor();
-	sl_sleeptimer_start_periodic_timer_ms(&alive_timer,
-			ALIVE_SLEEPTIMER_INTERVAL_MS, alive_cb, NULL, 0, 0);
-	//GPIO_PinOutSet(ACT_LED_PORT, ACT_LED_PIN);
+	initSensors();
+	GPIO_PinOutSet(ERR_LED_PORT, ERR_LED_PIN);
+	GPIO_PinOutSet(ACT_LED_PORT, ACT_LED_PIN);
+	GPIO_PinOutSet(PWR_EN_ST_PORT, PWR_EN_ST_PIN);
+	/*
+	 otCliOutputFormat("I2c0 scan: \n");
+	 for (uint8_t i = 0; i < 128; i++) {
+	 if (i2cTransferDone == I2C_detect1(I2C0, i))
+	 otCliOutputFormat("%d ", i);
+	 }
 
-	otCliOutputFormat("I2c0 scan: \n");
-	for (uint8_t i = 0; i < 128; i++) {
-		if (i2cTransferDone == I2C_detect1(I2C0, i))
-			otCliOutputFormat("%d ", i);
-	}
+	 otCliOutputFormat("I2c1 scan: \n");
+	 for (uint8_t i = 0; i < 128; i++) {
+	 if (i2cTransferDone == I2C_detect1(I2C1, i))
+	 otCliOutputFormat("%d ", i);
+	 }*/
 
-	otCliOutputFormat("I2c1 scan: \n");
-	for (uint8_t i = 0; i < 128; i++) {
-		if (i2cTransferDone == I2C_detect1(I2C1, i))
-			otCliOutputFormat("%d ", i);
-	}
 
-	opt3001_init();
 	float opt_buf = opt3001_conv(opt3001_read());
-	otCliOutputFormat("Light result: %d \r\n", opt_buf);
 
+	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
 	// Clean up potential SCD40 states
 	scd4x_wake_up();
 	sl_sleeptimer_delay_millisecond(30);
-
-	scd4x_stop_periodic_measurement();
-	sl_sleeptimer_delay_millisecond(500);
-
+	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
 	scd4x_set_automatic_self_calibration(0);
 	sl_sleeptimer_delay_millisecond(30);
+	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
+	//scd4x_stop_periodic_measurement();
+	scd4x_power_down();
 
-	//scd4x_perform_factory_reset();
-	//sl_sleeptimer_delay_millisecond(1200);
-	//uint16_t status = 0;
-	//scd4x_perform_self_test(&status);
-	//otCliOutputFormat("Status of scd4x %d \r\n", status);
-	// Initialize the application. For example, create periodic timer(s) or
-	// task(s) if the kernel is present.
 	app_init();
+	GPIO_PinOutClear(ERR_LED_PORT, ERR_LED_PIN);
 
-	eui._64b = SYSTEM_GetUnique();
 
 #if defined(SL_CATALOG_KERNEL_PRESENT)
   // Start the kernel. Task(s) created in app_init() will start running.
@@ -187,7 +180,7 @@ int main(void) {
 		//sl_sleeptimer_delay_millisecond(55);
 #if defined(SL_CATALOG_POWER_MANAGER_PRESENT)
 		// Let the CPU go to sleep if the system allows it.
-		//sl_power_manager_sleep();
+		sl_power_manager_sleep();
 #endif
 	}
 	// Clean-up when exiting the application.

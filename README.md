@@ -6,7 +6,7 @@ This is a photoacoustic NDIR CO<sub>2</sub> sensor node, utilizing energy harves
 The sensor communicates with the backend/database through 6LoWPAN on a Thread network.
 
 Refer to the functional block diagram below for an overview of the circuit design. <br><br>
-![Block Diagram](https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/blockdiag.jpg)<br>
+![Block Diagram](https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/blockdiagram.jpg)<br>
 *Figure 1: CO2SN Functional Block Diagram*
 <br><br>
 The figures below depict the custom PCB and enclosure.

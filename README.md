@@ -14,7 +14,8 @@ The figures below depict the custom PCB and enclosure.
 <div>
     <img src="https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/co2sn.jpeg" alt="PCB" width="400" />
     <img src="https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/case.jpeg" alt="PCB" width="400" />
-</div><br>
+</div>
+
 *Figure 2a: CO2SN PCB(left), Figure 2b: CO2SN Enclosure (right)*
 
 ## Energy Harvesting and Power Management

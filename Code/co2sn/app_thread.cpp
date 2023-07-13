@@ -84,7 +84,7 @@ void setNetworkConfiguration(void)
     aDataset.mComponents.mIsExtendedPanIdPresent = true;
 
     /* Set network key to 1234C0DE1AB51234C0DE1AB51234C0DE */
-    uint8_t key[OT_NETWORK_KEY_SIZE] = {};
+    uint8_t key[OT_NETWORK_KEY_SIZE] = { };
     memcpy(aDataset.mNetworkKey.m8, key, sizeof(aDataset.mNetworkKey));
     aDataset.mComponents.mIsNetworkKeyPresent = true;
 
@@ -101,11 +101,6 @@ void setNetworkConfiguration(void)
         otCliOutputFormat("otDatasetSetActive failed with: %d, %s\r\n", error, otThreadErrorToString(error));
         return;
     }
-}
-
-void applicationTick(void)
-{
-
 }
 
 

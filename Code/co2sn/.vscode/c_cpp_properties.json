@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "co2sn",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/Workstation/SimplicityStudio/SDKs/gecko_sdk_6/**"
+            ],
+            "defines": [
+                "MGM240SD22VNA=1",
+                "SL_COMPONENT_CATALOG_PRESENT=1",
+                "MBEDTLS_CONFIG_FILE=<sl_mbedtls_config.h>",
+                "OPENTHREAD_CONFIG_ENABLE_BUILTIN_MBEDTLS=0",
+                "OPENTHREAD_CORE_CONFIG_PLATFORM_CHECK_FILE='openthread-core-efr32-config-check.h'",
+                "OPENTHREAD_PROJECT_CORE_CONFIG_FILE='openthread-core-efr32-config.h'",
+                "OPENTHREAD_CONFIG_FILE='sl_openthread_generic_config.h'",
+                "OPENTHREAD_MTD=1",
+                "SL_OPENTHREAD_STACK_FEATURES_CONFIG_FILE='sl_openthread_features_config.h'",
+                "BUFFER_SIZE_DOWN=0",
+                "BUFFER_SIZE_UP=768",
+                "MBEDTLS_PSA_CRYPTO_CONFIG_FILE=<psa_crypto_config.h>",
+                "SL_RAIL_LIB_MULTIPROTOCOL_SUPPORT=0",
+                "SL_RAIL_UTIL_PA_CONFIG_HEADER=<sl_rail_util_pa_config.h>",
+                "RTT_USE_ASM=0",
+                "SEGGER_RTT_SECTION='SEGGER_RTT'",
+                "SLI_RADIOAES_REQUIRES_MASKING=1"
+            ],
+            "compilerPath": "C:/SiliconLabs/SimplicityStudio/v5/developer/toolchains/gnu_arm/10.2_2020q4/bin/arm-none-eabi-gcc"
+        }
+    ],
+    "version": 4
+}

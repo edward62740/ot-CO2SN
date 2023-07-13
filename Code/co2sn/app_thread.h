@@ -2,15 +2,14 @@
 #define APP_THREAD_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "stdint.h"
 
-void applicationTick(void);
-void sleepyInit(uint32_t poll_period);
-void setNetworkConfiguration(void);
-
+    void sleepyInit(uint32_t poll_period);
+    void setNetworkConfiguration(void);
 
 #ifdef __cplusplus
 }

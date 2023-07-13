@@ -40,9 +40,9 @@ LPC::SCD4X scd41(scd4x_wake_up, scd4x_power_down, scd4x_measure_single_shot,
 		scd4x_persist_settings, sl_sleeptimer_get_tick_count); // LPC instance
 
 
-constexpr static uint32_t SLEEPY_POLL_PERIOD_MS = 5000;
-constexpr static uint32_t ALIVE_SLEEPTIMER_INTERVAL_MS = 60000;
-constexpr static uint32_t MEASUREMENT_INTERVAL_MS = 60000*5;
+constexpr static uint32_t SLEEPY_POLL_PERIOD_MS = 5 * 1000;
+constexpr static uint32_t ALIVE_SLEEPTIMER_INTERVAL_MS = 60 * 1000;
+constexpr static uint32_t MEASUREMENT_INTERVAL_MS = 180* 1000;
 
 /* application scd41 state variables    */
 /* isOn -> isDiscarded -> isMeas  */
@@ -127,7 +127,6 @@ void app_process_action(void)
 {
     otTaskletsProcess(sInstance);
     otSysProcessDrivers(sInstance);
-    applicationTick();
     app_scd_algo();
     if(app_data.isPend) app_data.isPend = !appCoapCts(&app_data, MSG_DATA);
     else if(appCoapSendAlive) { appCoapCts(&app_data, MSG_ALIVE); appCoapSendAlive = false; }
@@ -143,40 +142,40 @@ static void app_scd_algo(void) {
 
 	if (!scd41_state.isOn) {
 		scd41_state.ret = scd41.powerOn();
-		otCliOutputFormat("power on %d, \n", scd41_state.ret);
+		//otCliOutputFormat("power on %d, \n", scd41_state.ret);
 		BURTC_CounterReset();
 		BURTC_CompareSet(0, 20);
 		BURTC_IntEnable(BURTC_IEN_COMP);
 
 	} else if (!scd41_state.isDiscarded && !scd41_state.isMeas) {
 		scd41_state.ret = scd41.discardMeasurement();
-		otCliOutputFormat("discard %d, \n", scd41_state.ret);
+		//otCliOutputFormat("discard %d, \n", scd41_state.ret);
 		otIp6Address *tmp;
 		uint8_t num = 0;
 
 		if(d.resolveIpResultReady(&tmp, &num))
 		{
-			otCliOutputFormat(
-					"**Application layer resolve complete, found %d devices**\n",
-					num);
+			//otCliOutputFormat(
+			//		"**Application layer resolve complete, found %d devices**\n",
+			//		num);
 			for (uint8_t i = 0; i < num; i++) {
 				char buf[OT_IP6_ADDRESS_STRING_SIZE];
 
 				otIp6AddressToString(&tmp[i], buf,
 						sizeof(buf));
-				otCliOutputFormat("%s\n ", buf);
+				//otCliOutputFormat("%s\n ", buf);
 
 			}
 		}
-		if(!d.browseResultIsOverflow()) otCliOutputFormat("Assert: Success \n\n");
-		else  otCliOutputFormat("Assert: More entries than buffers \n\n");
+		//if(!d.browseResultIsOverflow()) otCliOutputFormat("Assert: Success \n\n");
+		//else  otCliOutputFormat("Assert: More entries than buffers \n\n");
 		BURTC_CounterReset();
 		BURTC_CompareSet(0, 5200);
 		BURTC_IntEnable(BURTC_IEN_COMP);
 
 	} else if (scd41_state.isDiscarded && !scd41_state.isMeas) {
 		scd41_state.ret = scd41.measure();
-		otCliOutputFormat("meas %d, \n", scd41_state.ret);
+		//otCliOutputFormat("meas %d, \n", scd41_state.ret);
 		BURTC_CounterReset();
 		BURTC_CompareSet(0, 5200);
 		BURTC_IntEnable(BURTC_IEN_COMP);
@@ -184,21 +183,21 @@ static void app_scd_algo(void) {
 	} else if (scd41_state.isDiscarded && scd41_state.isMeas) {
 		GPIO_PinOutSet(ERR_LED_PORT, ERR_LED_PIN);
 		scd41_state.ret = scd41.read(&app_data.co2, &app_data.temp, &app_data.hum);
-		otCliOutputFormat(
-				"Measurement result: CO2 %d, temp %d, hum %d  ERR code: %d \r\n",
-				app_data.co2, app_data.temp, app_data.hum, scd41_state.ret);
+		//otCliOutputFormat(
+				//"Measurement result: CO2 %d, temp %d, hum %d  ERR code: %d \r\n",
+				//app_data.co2, app_data.temp, app_data.hum, scd41_state.ret);
 		//GPIO_PinOutSet(PWR_EN_ST_PORT, PWR_EN_ST_PIN);
 		scd41.get_last_frc(&app_data.offset, &app_data.age, &app_data.num);
-		otCliOutputFormat(
-				"calibration result: Cycles ago: %d, Offset: %d, Total: %d \r\n",
-				app_data.age, app_data.offset, app_data.num);
+		//otCliOutputFormat(
+			//	"calibration result: Cycles ago: %d, Offset: %d, Total: %d \r\n",
+				//app_data.age, app_data.offset, app_data.num);
 		app_power_status();
 		//GPIO_PinOutClear(PWR_EN_ST_PORT, PWR_EN_ST_PIN);
 		scd41_state.ret = scd41.powerOff();
 		app_data.isPend = !appCoapCts(&app_data, MSG_DATA);
 		//d.browse("_ot._udp.default.service.arpa.");
 		//d.resolveHost("server", "_ing._udp.default.service.arpa.");
-		d.resolve4("google.com");
+		//d.resolve4("google.com");
 		BURTC_CounterReset();
 		BURTC_CompareSet(0, MEASUREMENT_INTERVAL_MS);
 		BURTC_IntEnable(BURTC_IEN_COMP);
@@ -300,7 +299,7 @@ void sl_ot_create_instance(void)
 
 void sl_ot_cli_init(void)
 {
-    otAppCliInit(sInstance);
+    //otAppCliInit(sInstance);
 }
 
 

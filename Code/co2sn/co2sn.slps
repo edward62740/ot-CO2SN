@@ -8,7 +8,7 @@
     <properties key="projectCommon.kitId" value=""/>
     <properties key="projectCommon.partId" value="mcu.arm.efr32.mg24.mgm240sd22vna"/>
     <properties key="projectCommon.toolchainId" value="com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103"/>
-    <properties key="universalConfig.projectTypeIds" value="com.silabs.ss.framework.ide.project.core.cdtMbsProjectType"/>
+    <properties key="universalConfig.projectTypeIds" value="com.silabs.ss.framework.ide.project.core.cdtMbsProjectType com.silabs.framework.project.vscode"/>
     <properties key="projectCommon.importModeId" value="COPY"/>
   </descriptors>
 </model:MDescriptors>

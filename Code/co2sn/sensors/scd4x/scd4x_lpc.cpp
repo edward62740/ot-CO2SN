@@ -118,7 +118,7 @@ lpc_ret SCD4X::measure()
 		fsm.limit = offset > _sig_get_fsm_offset();
 		uint16_t ret = 0xFFFF;
 		scd_fp.frc(fsm.limit ?co2+_sig_get_fsm_offset() : SCD4X_LPC_BASELINE_CO2_PPM, &ret);
-		otCliOutputFormat("%d baseline calibration \r\n", fsm.ttl);
+		//otCliOutputFormat("%d baseline calibration \r\n", fsm.ttl);
 		_mutex_request_lock(SCD4X_LPC_CMD_FRC_LOCK_DUR_MS);
 		frc_ctr++;
 		prev_frc_offset = ret - 0x8000U;
@@ -144,7 +144,7 @@ lpc_ret SCD4X::measure()
 		uint16_t ret = 0xFFFF;
 		scd_fp.frc(co2 - (fsm.limit ? _sig_get_fsm_offset() : offset),
 				&ret);
-		otCliOutputFormat("%d ttl calibration \r\n", fsm.ttl);
+		//otCliOutputFormat("%d ttl calibration \r\n", fsm.ttl);
 		_mutex_request_lock(SCD4X_LPC_CMD_FRC_LOCK_DUR_MS);
 		frc_ctr++;
 		prev_frc_offset = ret - 0x8000U;
@@ -158,7 +158,7 @@ lpc_ret SCD4X::measure()
 
 void SCD4X::_sig_fsm_next(void) {
 
-	otCliOutputFormat("Next state: %d \r\n", fsm.state+1);
+	//otCliOutputFormat("Next state: %d \r\n", fsm.state+1);
 	switch (fsm.state) {
 	case STATE_FIRST: {
 		fsm.state = STATE_INIT;
@@ -209,7 +209,7 @@ lpc_ret SCD4X::_sig_scd_fail(bool trig)
 		return ERR_NONE;
 	}
 	else fsm._cons_fail++;
-	otCliOutputFormat("_sig_scd_fail \r\n");
+	//otCliOutputFormat("_sig_scd_fail \r\n");
 	return ERR_SCD;
 }
 

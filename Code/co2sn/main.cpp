@@ -31,7 +31,7 @@
 #include <openthread/cli.h>
 #include <openthread/platform/logging.h>
 
-/*
+
 I2C_TransferReturn_TypeDef I2C_detect1(I2C_TypeDef *i2c, uint8_t addr) {
 
 	I2C_TransferSeq_TypeDef i2cTransfer;
@@ -46,7 +46,7 @@ I2C_TransferReturn_TypeDef I2C_detect1(I2C_TypeDef *i2c, uint8_t addr) {
 	return I2CSPM_Transfer(i2c, &i2cTransfer);
 
 }
-*/
+
 void initGPIO(void) {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 	GPIO_PinModeSet(PWR_ST_0_PORT, PWR_ST_0_PIN, gpioModeInput, 1); // Asserted when the LDOs can be enabled (i.e. Vbatt > Vchrdy)
@@ -134,31 +134,21 @@ int main(void) {
 	GPIO_PinOutSet(ERR_LED_PORT, ERR_LED_PIN);
 	GPIO_PinOutSet(ACT_LED_PORT, ACT_LED_PIN);
 	GPIO_PinOutSet(PWR_EN_ST_PORT, PWR_EN_ST_PIN);
-	/*
-	 otCliOutputFormat("I2c0 scan: \n");
-	 for (uint8_t i = 0; i < 128; i++) {
-	 if (i2cTransferDone == I2C_detect1(I2C0, i))
-	 otCliOutputFormat("%d ", i);
-	 }
-
-	 otCliOutputFormat("I2c1 scan: \n");
-	 for (uint8_t i = 0; i < 128; i++) {
-	 if (i2cTransferDone == I2C_detect1(I2C1, i))
-	 otCliOutputFormat("%d ", i);
-	 }*/
 
 
 	float opt_buf = opt3001_conv(opt3001_read());
 
 	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
 	// Clean up potential SCD40 states
+
 	scd4x_wake_up();
 	sl_sleeptimer_delay_millisecond(30);
 	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
 	scd4x_set_automatic_self_calibration(0);
 	sl_sleeptimer_delay_millisecond(30);
 	GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
-	//scd4x_stop_periodic_measurement();
+	scd4x_stop_periodic_measurement();
+	sl_sleeptimer_delay_millisecond(30);
 	scd4x_power_down();
 
 	app_init();
@@ -177,7 +167,6 @@ int main(void) {
 		app_process_action();
 
 		// GPIO_PinOutToggle(ACT_LED_PORT, ACT_LED_PIN);
-		//sl_sleeptimer_delay_millisecond(55);
 #if defined(SL_CATALOG_POWER_MANAGER_PRESENT)
 		// Let the CPU go to sleep if the system allows it.
 		sl_power_manager_sleep();

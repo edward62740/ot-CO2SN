@@ -18,7 +18,7 @@
 #include "stdio.h"
 #include "string.h"
 
-#define APP_DNS_DEBUG_PRINT
+//#define APP_DNS_DEBUG_PRINT
 
 dns::dns(otInstance* (*getotInst)(void), uint8_t max_dns, uint8_t max_addr) {
 	getInst = getotInst;
@@ -44,7 +44,7 @@ dns::dns(otInstance* (*getotInst)(void), uint8_t max_dns, uint8_t max_addr) {
 	addrRespInfo = new otIp6Address[max_addr];
 	addrRespInfoCount = max_addr;
 }
-
+#ifdef APP_DNS_DEBUG_PRINT
 static void outputPrintDnsTextData(const uint8_t *aTxtData,
 		uint16_t aTxtDataLength) {
 	otDnsTxtEntry entry;
@@ -107,6 +107,7 @@ static void outputPrintDnsServiceInfo(uint8_t aIndentSize,
 	}
 
 }
+#endif // APP_DNS_DEBUG_PRINT
 
 void dns::browseRespHandler(otError aError,
 		const otDnsBrowseResponse *aResponse, void *aContext) {

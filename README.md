@@ -34,17 +34,19 @@ The quiescent power consumption (I<sub>Q</sub>) breakdown by design for all non-
 | AEM10941 | 0.5µA                     | LDO off             |
 | OPT3001  | 0.4µA                     | FS Lux              |
 | SCD41    | 0.5µA                     | PD                  |
+| MAX9634  | 1.1µA                     |                     |
 
-The supercapacitor (FC0H474ZF) maintains a charge current of <2µA after the initial absorption current. This will be assumed to be the self-discharge current I<sub>SD</sub> for all V<sub>cap</sub> > V<sub>hold</sub>. <br>
+The supercapacitor (FC0H474ZF) maintains a charge current of <2µA after the initial absorption current. This will be assumed to be the leakage current I<sub>LEAK</sub> for all V<sub>cap</sub> > V<sub>hold</sub>. The self-discharge characteristic is given by an exponential, then a linear decay [[2]](#2).<br>
 
 Based on empirical data (measured at the V<sub>BACK</sub> node, the average current of the system can be estimated (with the use of the [algorithm](#algorithm)):
 <br><br>
 $I_{\text{meas}} = \left[\frac{{50.8\text{mA} \times 1.276 \times 2 + 0.12\text{mA} \times (5-1.276) \times 2 + 0.02 \times 4.2}}{{10.02}}\right] = 12.83\text{mA}$<br>
-$I_{\text{avg}} = (I_{Q} + I_{SD}) + \left(I_{\text{meas}} \times \frac{{10.03}}{{3600}}\right) \times \{\text{MEASUREMENTS/hr}} \text{  mA}$
+$I_{\text{avg}} = (I_{Q} + I_{LEAK}) + \left(I_{\text{meas}} \times \frac{{10.02}}{{3600}}\right) \times \{\text{MEASUREMENTS/hr}} \text{  mA}$
 
 For a typical application, such as in a home, CO<sub>2</sub> rates change logarithmically [[1]](#1) provided some ventilation. Hence, sample rate could be adjusted based on the previous measurements' rate of change. <br>
 
-However, in most cases, a sample rate of 30mins-1h (<115µA) is sufficient to detect dangerous changes in indoor CO<sub>2</sub> concentrations. With approx. 200 lux from an indoor LED source in the range 400-1000nm, batteryless operation is achievable. <br>
+However, in most cases, a sample rate of 30mins-1h (<115µA) is sufficient to detect dangerous changes in indoor CO<sub>2</sub> concentrations. With approx. 350 lux from an indoor LED source in the range 400-1000nm (where the QE exceeds 80%), batteryless operation is achievable. <br>
+
 ## Algorithm
 This project utilizes a custom [algorithm](https://github.com/edward62740/SCD4x-LPC) designed for ultra-low power applications such as this one, where the manufacturer supplied algorithm is unworkable.<br>
 
@@ -58,5 +60,8 @@ The algorithm is designed to closely mirror the built-in algorithm.
 
 
 ## References
-<a id="1">[1]</a> 
+<a id="1">[1]</a>
 Batog, P., & Badura, M. (2013). Dynamic of Changes in Carbon Dioxide Concentration in Bedrooms. Procedia Engineering, 57, 175–182. https://doi.org/10.1016/j.proeng.2013.04.025
+<br>
+<a id="2">[2]</a>
+Kowal, J., Avaroglu, E., Chamekh, F., Šenfelds, A., Thien, T., Wijaya, D., & Sauer, D. U. (2011). Detailed analysis of the self-discharge of supercapacitors. Journal of Power Sources, 196(1), 573-579.

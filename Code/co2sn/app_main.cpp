@@ -42,7 +42,7 @@ LPC::SCD4X scd41(scd4x_wake_up, scd4x_power_down, scd4x_measure_single_shot,
 
 constexpr static uint32_t SLEEPY_POLL_PERIOD_MS = 5 * 1000;
 constexpr static uint32_t ALIVE_SLEEPTIMER_INTERVAL_MS = 60 * 1000;
-constexpr static uint32_t MEASUREMENT_INTERVAL_MS = 180* 1000;
+constexpr static uint32_t MEASUREMENT_INTERVAL_MS = 1800 * 1000;
 
 /* application scd41 state variables    */
 /* isOn -> isDiscarded -> isMeas  */

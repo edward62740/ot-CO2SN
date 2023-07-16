@@ -20,8 +20,8 @@ The figures below depict the custom PCB and enclosure.
 
 ## Energy Harvesting and Power Management
 In general, there are 3 power sources used: the PV cell array (SM141K05TF), supercapacitor (FC0H474ZF), and 2xAA (optional) backup.<br>
-The primary assumption is that this sensor will receive only indirect sunlight and/or artificial lighting, hence a larger capacity from other storage technologies such as LIC/Li-ion may not be preferable if the capacity cannot be properly utilized, hence the use of a supercapacitor for the expected multiple discharges (including partial ones) per day.<br>
-In the daytime, indoor lighting (approx. 100lux) is largely sufficient to indefinitely sustain a 1.5h sampling rate.
+The primary assumption is that this sensor will receive only indirect sunlight and/or artificial lighting, hence a larger capacity from other storage technologies such as LIC/Li-ion may not be preferable if the capacity cannot be properly utilized, hence the use of a supercapacitor for the expected multiple discharges (including partial ones) per day. Furthermore, exposure to direct sunlight will introduce a non-trivial heating effect on the sensor elements; it is not known how the sensor readings would be affected. <br>
+In the daytime, indoor lighting (approx. 350lux) is largely sufficient to indefinitely sustain a 1.5h sampling rate.
 For completely non-battery backed operation, assuming a fully-charged supercapacitor with $1.551\text{C}$, can sustain maximally 10 cycles of CO2 measurements taking up $108\text{mC}$ each. In practice, self-discharge of the supercapacitor and quiescent currents are not negligible, and any sampling rate exceeding 1.5h should be backed up with the 2xAA for night-time operation.<br>
 
 The sensor can also be configured to run completely off batteries.<br>
@@ -36,6 +36,7 @@ The quiescent power consumption (I<sub>Q</sub>) breakdown by design for all non-
 | SCD41    | 0.5µA                     | PD                  |
 | MAX9634  | 1.1µA                     |                     |
 
+Initial designs where the sensors were segmented into seperate power domains and power gated did not yield good results, in some cases even increasing the total power due to cold start-up sequences.<br>
 The supercapacitor (FC0H474ZF) maintains a charge current of <2µA after the initial absorption current. This will be assumed to be the leakage current I<sub>LEAK</sub> for all V<sub>cap</sub> > V<sub>hold</sub>. The self-discharge characteristic is given by an exponential, then a linear decay [[2]](#2).<br>
 
 Based on empirical data (measured at the V<sub>BACK</sub> node, the average current of the system can be estimated (with the use of the [algorithm](#algorithm)):
@@ -55,6 +56,12 @@ The algorithm is designed to closely mirror the built-in algorithm.
 ![PCB](https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/current_meas.png)<br>
 *Figure 3: Current profile (SCD41 measuring)*
 
+## Communication
+Figure 4 denotes the typical communication sequence that the device performs to send measurements to the InfluxDB database.<br>
+![Comms](https://github.com/edward62740/ot-CO2SN/blob/master/Documentation/comms.png)<br>
+*Figure 4: Communication Sequence Diagram*
+
+CoAP packets containing measurement data are sent aggressively (i.e. require ACK and repeated until received), while ordinary status or informational packets are fire-and-forget, in order not to waste a measurement. 
 
 [^1]: This sensor is optionally battery backed by 2xAA cells, to allow for higher sampling frequencies and redundancy.
 
